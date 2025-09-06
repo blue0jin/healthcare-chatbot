@@ -137,7 +137,7 @@ st.markdown('<h1 class="main-title">🏥 건강 궁금해요? 궁금하면 물�
 st.markdown('<p class="subtitle">건강에 관한 궁금증을 해결해드립니다</p>', unsafe_allow_html=True)
 
 # Streamlit app
-st.title("여행용 챗봇과 대화하기")
+#st.title("여행용 챗봇과 대화하기")
 openai_api_key = st.secrets['openai']['API_KEY']
 client = OpenAI(api_key  = openai_api_key)
 
