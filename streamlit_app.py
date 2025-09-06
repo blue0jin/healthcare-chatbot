@@ -136,35 +136,10 @@ st.markdown("""
 st.markdown('<h1 class="main-title">🏥 건강 궁금해요? 궁금하면 물어봐!</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">건강에 관한 궁금증을 해결해드립니다</p>', unsafe_allow_html=True)
 
-# API 키 상태 관리
-if "api_key_set" not in st.session_state:
-    st.session_state.api_key_set = False
-
-# API 키 입력 (키가 설정되지 않은 경우에만 표시)
-if not st.session_state.api_key_set:
-    with st.container():
-        #st.markdown('<div class="api-container">', unsafe_allow_html=True)
-        st.markdown("**🔑 OpenAI API 키 설정**")
-        openai_api_key = st.text_input("API 키를 입력하세요", type="password", placeholder="sk-...")
-        
-        if not openai_api_key:
-            st.warning("⚠️ OpenAI API 키를 입력해주세요.")
-            st.info("💡 API키가 없으면 [OpenAI 웹사이트](https://platform.openai.com/)에서 API 키를 발급받을 수 있습니다.")
-            st.markdown('</div>', unsafe_allow_html=True)
-            st.stop()
-        
-        # API 키가 입력되면 세션에 저장하고 상태 변경
-        st.session_state.openai_api_key = openai_api_key
-        st.session_state.api_key_set = True
-        st.success("✅ API 키가 설정되었습니다.")
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.rerun()  # 페이지 새로고침으로 UI 업데이트
-else:
-    # API 키가 이미 설정된 경우 세션에서 가져오기
-    openai_api_key = st.session_state.openai_api_key
-
-# OpenAI 클라이언트 초기화
-client = OpenAI(api_key=openai_api_key)
+# Streamlit app
+st.title("여행용 챗봇과 대화하기")
+openai_api_key = st.secrets['openai']['API_KEY']
+client = OpenAI(api_key  = openai_api_key)
 
 # 세션 상태 초기화
 if "messages" not in st.session_state:
